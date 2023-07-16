@@ -1,4 +1,5 @@
 import React from "react";
+import { NUM_OF_LETTERS_PER_WORD } from "../../constants";
 
 function GuessInput({ handleSubmitGuess, gameStatus }) {
   const [guess, setGuess] = React.useState("");
@@ -11,7 +12,7 @@ function GuessInput({ handleSubmitGuess, gameStatus }) {
       return;
     }
 
-    if (guess.length !== 5) {
+    if (guess.length !== NUM_OF_LETTERS_PER_WORD) {
       return;
     }
 
@@ -25,10 +26,10 @@ function GuessInput({ handleSubmitGuess, gameStatus }) {
       <input
         id={`guess-${id}`}
         type="text"
-        minLength={5}
-        maxLength={5}
-        pattern="[a-zA-Z]{5}"
-        title="5 letter word"
+        minLength={NUM_OF_LETTERS_PER_WORD}
+        maxLength={NUM_OF_LETTERS_PER_WORD}
+        pattern={`[a-zA-Z]{${NUM_OF_LETTERS_PER_WORD}}`}
+        title={`${NUM_OF_LETTERS_PER_WORD} letter word`}
         value={guess}
         onChange={(event) => {
           setGuess(event.target.value.toUpperCase());
