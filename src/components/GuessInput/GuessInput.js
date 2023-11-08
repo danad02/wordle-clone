@@ -1,9 +1,14 @@
 import React from "react";
 import { NUM_OF_LETTERS_PER_WORD } from "../../constants";
 
-function GuessInput({ handleSubmitGuess, gameStatus }) {
-  const [guess, setGuess] = React.useState("");
+function GuessInput({
+  guess,
+  handleGuessChange,
+  handleSubmitGuess,
+  gameStatus,
+}) {
   const id = React.useId();
+  const guessInputId = `${id}-guess`;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,14 +22,14 @@ function GuessInput({ handleSubmitGuess, gameStatus }) {
     }
 
     handleSubmitGuess(guess);
-    setGuess("");
+    handleGuessChange("");
   };
 
   return (
     <form className="guess-input-wrapper" onSubmit={handleSubmit}>
-      <label htmlFor={`guess-${id}`}>Enter guess:</label>
+      <label htmlFor={guessInputId}>Enter guess:</label>
       <input
-        id={`guess-${id}`}
+        id={guessInputId}
         type="text"
         minLength={NUM_OF_LETTERS_PER_WORD}
         maxLength={NUM_OF_LETTERS_PER_WORD}
@@ -32,7 +37,7 @@ function GuessInput({ handleSubmitGuess, gameStatus }) {
         title={`${NUM_OF_LETTERS_PER_WORD} letter word`}
         value={guess}
         onChange={(event) => {
-          setGuess(event.target.value.toUpperCase());
+          handleGuessChange(event.target.value.toUpperCase());
         }}
         disabled={gameStatus !== "running"}
       />
